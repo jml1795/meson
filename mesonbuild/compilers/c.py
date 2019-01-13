@@ -1156,6 +1156,10 @@ class ClangCCompiler(ClangCompiler, CCompiler):
             return basic + ['-Wl,-headerpad_max_install_names']
         return basic
 
+    def get_symbol_export_file_args(self, path):
+        if self.compiler_type.is_osx_compiler:
+            return ['-Wl,-exported_symbols_list', path]
+        return ['-Wl,--version-script=' + path]
 
 class ArmclangCCompiler(ArmclangCompiler, CCompiler):
     def __init__(self, exelist, version, compiler_type, is_cross, exe_wrapper=None, **kwargs):

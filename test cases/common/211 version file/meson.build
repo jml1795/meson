@@ -6,7 +6,7 @@ cc = meson.get_compiler('c')
 if cc.get_id() == 'msvc'
   suffix = '.sym'
 else
-  suffix = '.map'
+  suffix = host_machine.system() == 'darwin' ? '-clang.map' : '.map'
 endif
 
 mapfile = 'bob' + suffix
