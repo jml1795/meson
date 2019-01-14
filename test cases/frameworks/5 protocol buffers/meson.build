@@ -7,8 +7,9 @@ if not protoc.found() or not dep.found()
   error('MESON_SKIP_TEST: protoc tool and/or protobuf pkg-config dependency not found')
 endif
 
+sleeper = find_program('sleeper.sh', required : false)
 
-gen = generator(protoc, \
+gen = generator(sleeper, \
   output    : ['@BASENAME@.pb.cc', '@BASENAME@.pb.h'],
   arguments : ['--proto_path=@CURRENT_SOURCE_DIR@', '--cpp_out=@BUILD_DIR@', '@INPUT@'])
 
