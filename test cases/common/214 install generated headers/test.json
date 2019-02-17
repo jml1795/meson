@@ -1,0 +1,13 @@
+{
+    "name": "test",
+    "members" : [
+      {
+         "name" : "a",
+         "type" : "int"
+      },
+      {
+         "type" : "double",
+         "name" : "b"
+      }
+   ]
+}
