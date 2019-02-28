@@ -18,6 +18,7 @@ from .. import mlog
 from ..mesonlib import EnvironmentException, Popen_safe
 from .compilers import (Compiler, cuda_buildtype_args, cuda_optimization_args,
                         cuda_debug_args, CompilerType, get_gcc_soname_args)
+from typing import List
 
 class CudaCompiler(Compiler):
     def __init__(self, exelist, version, is_cross, exe_wrapper=None):
@@ -48,6 +49,9 @@ class CudaCompiler(Compiler):
 
     def thread_link_flags(self, environment):
         return ['-Xcompiler=-pthread']
+
+    def openmp_flags(self) -> List[str]:
+        return ['-Xcompiler=-fopenmp']
 
     def sanity_check(self, work_dir, environment):
         mlog.debug('Sanity testing ' + self.get_display_language() + ' compiler:', ' '.join(self.exelist))

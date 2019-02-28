@@ -613,6 +613,9 @@ class Backend:
                     commands += ['--pkg', dep.name]
                 elif isinstance(dep, dependencies.ExternalLibrary):
                     commands += dep.get_link_args('vala')
+            elif compiler.language == 'cuda':
+                # hack but works (for only this one arg) - how many more will there be?
+                commands += [arg.replace('-fopenmp', '-Xcompiler=-fopenmp') for arg in dep.get_compile_args()]
             else:
                 commands += dep.get_compile_args()
             # Qt needs -fPIC for executables

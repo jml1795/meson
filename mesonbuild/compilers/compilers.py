@@ -62,7 +62,10 @@ clib_langs = ('objcpp', 'cpp', 'objc', 'c', 'fortran',)
 # List of languages that can be linked with C code directly by the linker
 # used in build.py:process_compilers() and build.py:get_dynamic_linker()
 # XXX: Add Rust to this?
-clink_langs = ('d', 'cuda') + clib_langs
+
+# depending on the order here causes the link to be done by gcc or nvcc
+clink_langs = ('d', 'cuda') + clib_langs # nvcc links
+# clink_langs = clib_langs + ('d', 'cuda') # gcc links
 clink_suffixes = ()
 for _l in clink_langs + ('vala',):
     clink_suffixes += lang_suffixes[_l]
