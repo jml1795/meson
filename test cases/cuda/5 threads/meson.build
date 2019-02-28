@@ -1,7 +1,9 @@
-project('simple', 'cuda', version : '1.0.0')
+project('simple', 'cpp', 'cuda', version : '1.0.0')
 
 subdir('shared')
 
+cxx = meson.get_compiler('cpp')
+cudart_dep = declare_dependency(dependencies: [cxx.find_library('cudart', required: true)])
 thread_dep = dependency('threads')
-exe = executable('prog', 'main.cu', dependencies: [libkernels, thread_dep])
-test('cudatest', exe)
+magick_dep = dependency('MagickCore') # pulls in openmp
+exe = shared_library('lib', 'lib.cpp', dependencies: [libkernels, thread_dep, magick_dep, cudart_dep])
