@@ -45,7 +45,8 @@ def run(args):
         'scan-build-3.7', 'scan-build37',
         'scan-build-3.6', 'scan-build36',
         'scan-build-3.5', 'scan-build35',
-        'scan-build-6.0', 'scan-build-devel',  # development snapshot
+        'scan-build-6.0', 'scan-build60',
+        'scan-build-7', 'scan-build-devel',  # development snapshot
     ]
     toolname = 'scan-build'
     for tool in tools:
